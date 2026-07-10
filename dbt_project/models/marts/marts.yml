@@ -1,0 +1,24 @@
+models:
+  - name: mart_customer_rfm
+    description: "Tabel Data Mart yang berisi skor Recency, Frequency, dan Monetary untuk setiap pelanggan unik."
+    columns:
+      - name: customer_unique_id
+        description: "ID unik untuk setiap pelanggan."
+        tests:
+          - unique    # Memastikan tidak ada ID pelanggan yang duplikat
+          - not_null  # Memastikan tidak ada baris yang kosong pada kolom ini
+
+      - name: r_score
+        description: "Skor Recency dari 1 sampai 5."
+        tests:
+          - not_null
+
+      - name: f_score
+        description: "Skor Frequency dari 1 sampai 5."
+        tests:
+          - not_null
+
+      - name: m_score
+        description: "Skor Monetary dari 1 sampai 5."
+        tests:
+          - not_null

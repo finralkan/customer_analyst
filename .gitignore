@@ -1,0 +1,17 @@
+# Exclude Virtual python
+venv/
+__pycache__/
+.DS_Store
+
+# Exclude raw data dan database
+data/raw/
+data/processed/
+*.duckdb
+*.duckdb.wal
+
+# Exclude system file and log
+logs/
+target/
+dbt_packages/
+
+# Exclude raw file

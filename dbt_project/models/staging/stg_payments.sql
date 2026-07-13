@@ -7,6 +7,5 @@ SELECT
     payment_sequential,
     payment_type,
     payment_installments,
-    -- Memastikan nominal pembayaran bertipe data FLOAT/NUMERIC untuk kalkulasi nilai bisnis
     CAST(payment_value AS FLOAT) AS payment_amount
 FROM raw_payments

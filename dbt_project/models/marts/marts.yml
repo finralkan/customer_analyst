@@ -5,8 +5,8 @@ models:
       - name: customer_unique_id
         description: "ID unik untuk setiap pelanggan."
         tests:
-          - unique    # Memastikan tidak ada ID pelanggan yang duplikat
-          - not_null  # Memastikan tidak ada baris yang kosong pada kolom ini
+          - unique    # Cek ID pelanggan agar tidak ada yang duplikat
+          - not_null  # Cek baris kosong
 
       - name: r_score
         description: "Skor Recency dari 1 sampai 5."

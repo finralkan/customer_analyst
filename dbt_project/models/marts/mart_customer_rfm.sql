@@ -14,7 +14,7 @@ payments AS (
     GROUP BY order_id
 ),
 
--- 1. Menggabungkan data transaksi pelanggan
+-- Menggabungkan data transaksi pelanggan
 customer_transactions AS (
     SELECT
         c.customer_unique_id,
@@ -26,7 +26,7 @@ customer_transactions AS (
     LEFT JOIN payments p ON o.order_id = p.order_id
 ),
 
--- 2. Menghitung Nilai Agregat RFM per Pelanggan
+-- Menghitung Nilai Agregat RFM per Pelanggan
 customer_rfm_raw AS (
     SELECT
         customer_unique_id,
@@ -34,21 +34,20 @@ customer_rfm_raw AS (
         DATEDIFF('day', MAX(order_date), (SELECT MAX(order_date) FROM orders)) AS recency,
         -- Frequency: Total jumlah pesanan unik
         COUNT(DISTINCT order_id) AS frequency,
-        -- Monetary: Total uang yang dibelanjakan (CLV awal)
+        -- Monetary: Total uang yang dibelanjakan
         SUM(total_order_amount) AS monetary
     FROM customer_transactions
     GROUP BY customer_unique_id
 )
 
--- 3. Final Query untuk menyajikan data ke Dashboard
+-- Final Query untuk menyajikan data ke Dashboard
 SELECT
     customer_unique_id,
     recency,
     frequency,
     COALESCE(monetary, 0) AS monetary,
     
-    -- Memberikan skor otomatis 1-5 menggunakan fungsi NTILE (Statistik Industri)
-    -- Skor 5 adalah yang terbaik (paling baru belanja, paling sering, paling banyak belanja)
+    -- Skor 5 adalah yang terbaik
     NTILE(5) OVER (ORDER BY recency DESC) AS r_score, -- Semakin kecil recency, skor semakin tinggi
     NTILE(5) OVER (ORDER BY frequency ASC) AS f_score,
     NTILE(5) OVER (ORDER BY monetary ASC) AS m_score

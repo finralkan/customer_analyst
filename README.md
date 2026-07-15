@@ -21,7 +21,7 @@ Proyek ini mengimplementasikan alur kerja *Extract, Load, Transform* (ELT) :
 **Data Lineage:**
 `FTP .csv file` -> `Python Ingestion` -> `DuckDB (Raw)` -> `dbt (Staging)` -> `dbt (RFM Data Mart)` -> `Tableau (Dashboard)`
 
-## Rekomendasi Bisnis
+## Rekomendasi
 Berdasarkan analisis segmentasi RFM pada dataset, ditemukan beberapa *insight* utama:
 1. **Pelanggan Prioritas:** Kelompok ini menyumbang margin pendapatan terbesar dan sering melakukan transaksi dalam waktu dekat. **Aksi:** Pemberian akses eksklusif ke produk baru serta program *Loyalty Customer*.
 2. **Potensi Pelanggan Hilang (Calon Pelanggan Prioritas):** Pelanggan dengan nilai *Monetary* tertinggi namun jarang melakukan transaksi. **Aksi:** Melakukan strategi kampanye yang terpersonalisasi dengan diskon agresif dan menarik sehingga tidak beralih ke kompetitor.
